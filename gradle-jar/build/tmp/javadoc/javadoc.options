@@ -1,0 +1,17 @@
+-Xdoclint:none '-quiet'
+-Xmaxerrs '3'
+-Xmaxwarns '3'
+-charset 'UTF-8'
+-classpath 'F:\\jbr-github-ws\\gradle\\gradle-jar\\build\\classes\\java\\main;F:\\jbr-github-ws\\gradle\\gradle-jar\\build\\resources\\main;C:\\Users\\java2\\.gradle\\caches\\modules-2\\files-2.1\\org.springframework\\spring-context\\4.3.0.RELEASE\\e4470480fe1dda889d61af7e51e1f49df0533513\\spring-context-4.3.0.RELEASE.jar;C:\\Users\\java2\\.gradle\\caches\\modules-2\\files-2.1\\org.springframework\\spring-aop\\4.3.0.RELEASE\\2a2dc09e3e09515afb77af63526d4c3e3004da14\\spring-aop-4.3.0.RELEASE.jar;C:\\Users\\java2\\.gradle\\caches\\modules-2\\files-2.1\\org.springframework\\spring-beans\\4.3.0.RELEASE\\38da647f047779b176a0e2841900abca0196aefb\\spring-beans-4.3.0.RELEASE.jar;C:\\Users\\java2\\.gradle\\caches\\modules-2\\files-2.1\\org.springframework\\spring-expression\\4.3.0.RELEASE\\f16ef8bbbbb990b980a98dfeacc166f01c0c51a2\\spring-expression-4.3.0.RELEASE.jar;C:\\Users\\java2\\.gradle\\caches\\modules-2\\files-2.1\\org.springframework\\spring-core\\4.3.0.RELEASE\\1a0c76ffd8d8345064669f6cf255ab46a9881c77\\spring-core-4.3.0.RELEASE.jar;C:\\Users\\java2\\.gradle\\caches\\modules-2\\files-2.1\\commons-logging\\commons-logging\\1.2\\4bfc12adfe4842bf07b657f0369c4cb522955686\\commons-logging-1.2.jar'
+-d 'F:\\jbr-github-ws\\gradle\\gradle-jar\\build\\docs\\javadoc'
+-docencoding 'UTF-8'
+-doctitle 'Javadoc with SDK and Source Code Hyperlinks'
+-encoding 'UTF-8'
+-footer '<table><tbody style="vertical-align:middle"><table><tr><td>Copyright &copy; 2018 JBR Technology. All rights reserved.</td></tr><tr><td>Version: 0.1; Built: 2018-06-20T23:16:22+0530</td></tr></table></tbody></table>'
+-header '<table cellpadding="3"><tr><td>Header</td></tr></table>'
+-linkoffline 'https://docs.oracle.com/javase/8/docs/api/' 'build/docs/javadoc/doc-files/java8/'
+-linksource 
+-quiet 
+-use 
+-windowtitle 'Javadoc'
+'F:\\jbr-github-ws\\gradle\\gradle-jar\\src\\main\\java\\jbr\\gradlejar\\CalcMain.java'

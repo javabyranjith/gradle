@@ -1,0 +1,128 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'maven'
+   
+    // to create fat jar (consists all the dependent classes from external api)
+    id 'com.github.johnrengelman.shadow'    version '2.0.2'
+}
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+task wrapper(type: Wrapper){
+         gradleVersion = '4.8'
+     }
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework:spring-context:$springVersion"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.springframework:spring-test:$springVersion"
+}
+
+assemble.dependsOn shadowJar
+
+jar{
+    baseName = jarName
+    manifest {
+        attributes("Main-Class": "CalcMain" )   
+    }
+}
+
+/**
+* Java Document Files JAR
+*/
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+    baseName = jarName
+}
+
+javadoc {
+    failOnError = false
+   
+    doFirst{
+        copy {
+            from 'src/main/resources/doc-files'
+            into 'build/docs/javadoc/doc-files'
+        }
+
+    (options as StandardJavadocDocletOptions).with {
+        docTitle    'Javadoc with SDK and Source Code Hyperlinks'
+        footer        '<table><tbody style="vertical-align:middle"><table>' +
+                    '<tr><td>Copyright &copy; 2018 JBR Technology. All rights reserved.</td></tr>' +
+                    "<tr><td>Version: $project.version; Built: ${new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")}</td></tr>" +
+                    '</table></tbody></table>'
+        header        '<table cellpadding="3"><tr>' +
+                    '<td>Header</td>' +
+                    '</tr></table>'
+        windowTitle    'Javadoc'
+
+        // Add SDK hyperlinks...
+        linksOffline('https://docs.oracle.com/javase/8/docs/api/',
+                     'build/docs/javadoc/doc-files/java8/')
+        use = true
+
+        linkSource()
+
+        // Additional command-line args...
+        addStringOption('Xdoclint:none', '-quiet')
+        addStringOption('Xmaxerrs', '3')
+        addStringOption('Xmaxwarns', '3')
+        addStringOption('charset', 'UTF-8')
+        addStringOption('docencoding', 'UTF-8')
+        addStringOption('encoding', 'UTF-8')
+    }
+    }
+
+/**
+* Java Source Files JAR
+*/
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+    baseName = jarName
+}
+
+shadowJar {
+  baseName = jarName
+  classifier = null
+  zip64 true
+  dependencies {
+    include(dependency("org.springframework:spring-core:$springVersion"))
+    include(dependency("org.springframework:spring-context:$springVersion"))
+    include(dependency("org.springframework:spring-aop:$springVersion"))
+    include(dependency("org.springframework:spring-beans:$springVersion"))
+    include(dependency("org.springframework:spring-expression:$springVersion"))
+  }
+  exclude 'META-INF/*.DSA'
+  exclude 'META-INF/*.RSA'
+  exclude 'META-INF/*.SF'
+  exclude 'META-INF/*.MF'
+  exclude "LICENSE*"
+}
+
+sourceSets {
+    main {
+        java {
+          srcDirs = [ 'src/main/java' ] 
+        }
+        resources {
+            srcDirs = [ 'src/main/resources' ]
+        }
+    }
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+}
